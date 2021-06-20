@@ -101,6 +101,7 @@ public class AllCodonStored {
         
         return  (double)countC/countG;
     }
+    //this takes a storageResource parameter
     public void processGenes(StorageResource sr){
         int countGene = 0;
         int greaterThanSixty = 0;
