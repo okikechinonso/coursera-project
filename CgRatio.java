@@ -81,9 +81,7 @@ public class CgRatio {
     public void test(){
         URLResource page = 
         new URLResource("https://users.cs.duke.edu/~rodger/GRch38dnapart.fa");
-        String source = page.asString();
-        StorageResource gene = getAllGenes(source);
-        
+        String source = page.asString();  
         
         double cIndex = 
             countCg("cccatggggttctgtaaataactgcctagataataggagagagagagagactgttt");
