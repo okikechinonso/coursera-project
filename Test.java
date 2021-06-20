@@ -46,8 +46,3 @@ public class Test {
         System.out.println(count);
     }
 }
-//findding the gene with the cg ratio greater than 0.35
-            double cg = countCg(s);
-            if(cg>0.35){                
-                countCg++;
-            }
