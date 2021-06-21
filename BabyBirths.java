@@ -5,7 +5,7 @@
  */
 import edu.duke.*;
 import org.apache.commons.csv.*;
-
+import java.io.*;
 public class BabyBirths {
     
     // this print total number of births, girls and boys
@@ -39,7 +39,9 @@ public class BabyBirths {
         int genderCount = 0;
         int totalBirth = 0;
         int rank = 1;
-        FileResource fr = new FileResource("data/yob"+year+".csv");
+        
+        FileResource fr = yearFile(year);
+        
         for (CSVRecord rec : fr.getCSVParser(false)) {
             int currBirth = Integer.parseInt(rec.get(2));
             String csvName = rec.get(0);
@@ -58,11 +60,47 @@ public class BabyBirths {
         
     return rank;
     }
+    public String getName(int year, int rank, String gender){
+        int count = 0;
+         FileResource fr = yearFile(year);
+         for (CSVRecord rec : fr.getCSVParser(false)){            
+            String csvGender = rec.get(1);
+            
+            if(csvGender.equals(gender)){
+                count++;
+                if(count == rank){
+                    return rec.get(0);
+                }
+                
+            }            
+        }
+        return "NO NAME";
+    }
+    public String whatIsNameInYear(String name, int year, 
+                                    int newYear, String gender){
+        int rank = getRank(year,name,gender);
+        String newName = getName(newYear,rank,gender);         
+        return newName;
+    }
+    public int yearOfHighestRank(String name, String gender){
+        
+        DirectoryResource dr = new DirectoryResource();
+        for(File f: dr.selectedFiles()){
+            FileResource fr = new FileResource(f);            
+        }
+        return 0;
+    }
+    public FileResource yearFile(int year){
+        FileResource fr = new FileResource("data/yob"+year+".csv");
+        return fr;
+    }
     public void testTotalBirths () {
         //FileResource fr = new FileResource();
         FileResource fr = new FileResource("data/yob2014.csv");
         totalBirths(fr);
         int count = getRank(2014,"Jacob","M");
-        System.out.println(count);
+        String name = getName(2014,4,"M");
+        String newName = whatIsNameInYear("Jacob",2014,2013,"M");        
+        System.out.println(newName);
     }
 }
